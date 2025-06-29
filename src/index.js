@@ -10,13 +10,11 @@ const port = 3001; //http://localhost:3001/
 
 app.use(express.json());
 
-
 const corsOptions = {
-    origin: ["example.com","example2"]
-}
+  origin: ["example.com", "example2"],
+};
 
 app.use(cors(corsOptions));
-
 
 console.log(path.join(__dirname));
 
