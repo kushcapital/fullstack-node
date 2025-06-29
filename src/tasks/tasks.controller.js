@@ -19,12 +19,7 @@ function handleGetTasks(req, res) {
       createdAt: new Date().toISOString(),
     },
   ];
-  res.status(StatusCodes.OK).json({
-    status: "sucess",
-    StatusCodes: StatusCodes.OK,
-    message: ReasonPhrases.OK,
-    data: response,
-  });
+  res.status(StatusCodes.OK).json(response);  //adding middleware to process for statuscodes
 }
 
 function handlePostTasks(req, res) {

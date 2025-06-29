@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
+const responseFormatter = require("./middleware/responseFormatter.js");
 
 const app = express();
 const port = 3001; //http://localhost:3001/
@@ -27,6 +28,7 @@ let accessLogStream = fs.createWriteStream(
 
 app.use(morgan("combined", { stream: accessLogStream }));
 
+app.use(responseFormatter); //note the middleware should be above to route inorder to middlware to process before sending the response.
 app.use("/", tasksRouter);
 
 //listening to the port 3001
