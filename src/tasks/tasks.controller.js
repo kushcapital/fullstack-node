@@ -1,26 +1,10 @@
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const createTaskProvider = require("./providers/createTask.provider.js");
+const getTasksProvier = require("./providers/getTasks.provider.js");
 
-function handleGetTasks(req, res) {
-  let response = [
-    {
-      title: "Title of the task",
-      id: 1,
-      description: "Complete the project documentation",
-      completed: false,
-      priority: "high",
-      createdAt: new Date().toISOString(),
-    },
-    {
-      title: "Review code changes",
-      id: 2,
-      description: "Review pull request #123",
-      completed: true,
-      priority: "medium",
-      createdAt: new Date().toISOString(),
-    },
-  ];
-  res.status(StatusCodes.OK).json(response); //adding middleware to process for statuscodes
+async function handleGetTasks(req, res) {
+  const tasks = await getTasksProvier(req, res);
+  res.status(StatusCodes.OK).json(tasks); //adding middleware to process for statuscodes
 }
 
 async function handlePostTasks(req, res) {
