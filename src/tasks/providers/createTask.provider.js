@@ -1,15 +1,12 @@
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const Task = require("../task.schema.js");
+const { matchedData } = require("express-validator");
 
 async function createTaskProvider(req, res) {
   try {
-    const task = new Task({
-      title: req.body.title,
-      description: req.body.description,
-      status: req.body.status,
-      priority: req.body.priority,
-      dueDate: req.body.dueDate,
-    });
+    const validatedResult = matchedData(req);
+  
+    const task = new Task(validatedResult);
     await task.save();
     res.status(StatusCodes.CREATED).json(task);
   } catch (error) {
