@@ -12,15 +12,6 @@ const path = require("path");
     silly: 6
 */
 
-const logger = winston.logger({
-  format: winston.format.combine(
-    winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-    winston.format.printf(
-      (info = `${info.timestamp} [${info.level}] : ${info.message}`)
-    )
-  ),
-});
-
 const transports = [
   new winston.transports.Console({
     level: "info",
@@ -28,12 +19,26 @@ const transports = [
   }),
   new winston.transports.File({
     level: "info",
-    filename: path.join(__dirname, "../..", "info.log"),
+    filename: path.join(__dirname, "..", "info.log"),
     format: winston.format.json(),
   }),
   new winston.transports.File({
     level: "error",
-    filename: path.join(__dirname, "../..", "error.log"),
+    filename: path.join(__dirname, "..", "error.log"),
     format: winston.format.json(),
   }),
 ];
+
+const logger = winston.logger({
+  format: winston.format.combine(
+    winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+    winston.format.printf(
+      (info = `${info.timestamp} [${info.level}] : ${info.message}`)
+    )
+  ),
+  transports: transports,
+});
+
+
+
+module.exports = logger;
