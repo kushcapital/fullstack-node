@@ -5,20 +5,13 @@ const { matchedData } = require("express-validator");
 async function createTaskProvider(req, res) {
   try {
     const validatedResult = matchedData(req);
-  
     const task = new Task(validatedResult);
     await task.save();
-    res.status(StatusCodes.CREATED).json(task);
+    return res.status(StatusCodes.CREATED).json(task);
   } catch (error) {
-    if (error.name === "ValidationError") {
-      return res.status(StatusCodes.BAD_REQUEST).json({
-        error: "Validation failed",
-        details: error.message,
-      });
-    }
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      error: "Internal server error",
-      details: error.message,
+    console.log(error);
+    return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
+      reason: "unable to process your request at the moment, please try later.",
     });
   }
 }

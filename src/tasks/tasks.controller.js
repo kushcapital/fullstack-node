@@ -10,8 +10,7 @@ async function handleGetTasks(req, res) {
 }
 
 async function handlePostTasks(req, res) {
-  const tasks = await createTaskProvider(req, res);
-  res.status(StatusCodes.OK).json(tasks); //adding middleware to process for statuscodes
+  return await createTaskProvider(req, res);
 }
 
 async function handlePatchTasks(req, res) {
