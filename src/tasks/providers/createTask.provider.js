@@ -1,7 +1,7 @@
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const Task = require("../task.schema.js");
 const { matchedData } = require("express-validator");
-const logger = require("../../helpers/winston.helper.js");
+const errorLogger = require("../../helpers/errorLogger.helper.js")
 
 async function createTaskProvider(req, res) {
   try {
@@ -10,16 +10,8 @@ async function createTaskProvider(req, res) {
     await task.save();
     return res.status(StatusCodes.CREATED).json(task);
   } catch (error) {
-    logger.error(`Errror creating a new task: ${error.message}`, {
-      metadata: {
-        errorCode: error.code,
-        errorName: error.name,
-        method: req.method,
-        url: req.originalUrl,
-        body: req.body,
-        error: error,
-      },
-    });
+    errorLogger(`Errror creating a new task: ${error.message}`,req,error);
+   
     return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
       reason: "unable to process your request at the moment, please try later.",
     });
