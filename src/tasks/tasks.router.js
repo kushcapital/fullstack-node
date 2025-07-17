@@ -4,8 +4,16 @@ const taskController = require("./tasks.controller.js");
 const { StatusCodes } = require("http-status-codes");
 const tasksRouter = express.Router();
 const createTaskValidator = require("./validators/createTask.validator.js");
+const getTaskValidator = require("./validators/getTasks.validator.js");
 
-tasksRouter.get("/tasks", taskController.handleGetTasks);
+tasksRouter.get("/tasks", getTaskValidator, (req, res) => {
+  const result = validationResult(req);
+  if (result.isEmpty()) {
+    return taskController.handleGetTasks(req, res);
+  } else {
+    res.status(StatusCodes.BAD_REQUEST).json(result.array());
+  }
+});
 
 tasksRouter.post("/tasks", createTaskValidator, (req, res) => {
   const result = validationResult(req);
