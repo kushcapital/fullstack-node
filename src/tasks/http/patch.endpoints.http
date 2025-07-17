@@ -3,10 +3,7 @@ Content-Type: application/json
 
 
 {
-    "_id": "686c97bc16d30e95f3048c91",
-    "title": "Updated Task",
-    "dueDate": "2025-01-01T12:00:00Z",
-    "description": "This is just another example for the description. This is test description ",
-    "priority": "normal",
-    "status": "todo"
+    "_id": "686c99599e855483f811458a",
+    "title": "Newly Updated Task",
+    "description":"it is working perfectly "
 }

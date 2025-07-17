@@ -1,5 +1,4 @@
 const { body } = require("express-validator");
-const { matchedData } = require("express");
 
 const createTaskValidator = [
   body("title", "This title cannot be empty").notEmpty(),
