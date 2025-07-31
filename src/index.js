@@ -18,7 +18,7 @@ const envfile = `.env.${process.env.NODE_ENV}`;
 dotenv.config({ path: envfile });
 
 const app = express();
-const port = 3001; //http://localhost:3001/
+const port = parseInt(process.env.PORT); //http://localhost:3001/
 
 app.use(express.json());
 
@@ -53,10 +53,9 @@ app.use((req, res) => {
 
 async function bootstrap() {
   try {
-    await mongoose.connect(
-      "mongodb+srv://kushwaharajeev:%40Aryan12345@nodejs.exgbf6f.mongodb.net/",
-      { dbname: "fullstackTasks" }
-    );
+    await mongoose.connect(process.env.DATABASE_URL, {
+      dbname: process.env.DATABASE_NAME,
+    });
     console.log("Connected to MongoDB");
     //listening to the port 3001
     app.listen(port, () => {
