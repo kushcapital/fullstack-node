@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.js"
+    "dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "staging": "cross-env NODE_ENV=staging nodemon src/index.js",
+    "start": "cross-env NODE_ENV=production nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   "homepage": "https://github.com/kushcapital/node-project#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^10.0.0",
     "date-fns": "^4.1.0",
     "express": "^4.21.1",
     "express-validator": "^7.2.1",
