@@ -7,6 +7,13 @@ const bcrypt = require("bcrypt");
 async function createUserProvider(req, res) {
   const validatedData = matchedData(req);
   try {
+    const existingUser = await User.findOne({ email: validatedData.email });
+
+    if (existingUser) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: "A user with this email already exists",
+      });
+    }
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(validatedData.password, salt);
 
