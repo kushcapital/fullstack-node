@@ -2,19 +2,28 @@ const User = require("../user.schema.js");
 const { matchedData } = require("express-validator");
 const { StatusCodes } = require("http-status-codes");
 const errorLogger = require("../../helpers/errorLogger.helper.js");
+const bcrypt = require("bcrypt");
 
 async function createUserProvider(req, res) {
-  validatedData = matchedData(req);
+  const validatedData = matchedData(req);
   try {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(validatedData.password, salt);
+
     const user = new User({
       firstName: validatedData.firstName,
       lastName: validatedData.lastName,
       email: validatedData.email,
-      password: validatedData.password,
+      password: hashedPassword,
     });
     await user.save();
-    delete user.password;
-    return res.status(StatusCodes.OK).json(user);
+
+    return res.status(StatusCodes.OK).json({
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    });
   } catch (error) {
     errorLogger("Error while creating user", req, error);
     return res.status(StatusCodes.GATEWAY_TIMEOUT).json({

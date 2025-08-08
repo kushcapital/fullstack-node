@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/kushcapital/node-project#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "cross-env": "^10.0.0",
     "date-fns": "^4.1.0",
