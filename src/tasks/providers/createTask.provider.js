@@ -6,9 +6,8 @@ const errorLogger = require("../../helpers/errorLogger.helper.js");
 async function createTaskProvider(req, res) {
   try {
     const validatedResult = matchedData(req);
-    const task = new Task(validatedResult);
+    const task = new Task({...validatedResult, user: req.user.sub});
 
-    console.log(req.user);
     await task.save();
     return res.status(StatusCodes.CREATED).json(task);
   } catch (error) {
