@@ -8,6 +8,8 @@ const createUser = require("../users/users.router.js");
 const tasksRouter = require("../tasks/tasks.router.js");
 const responseFormatter = require("../middleware/responseFormatter.js");
 const expressWinstonLogger = require("../middleware/expressWinston.middleware.js");
+const swaaggerUi = require("swagger-ui-express");
+const swaggerSpecs = require("./swagger.config.js");
 
 function configureApp(app) {
   app.use(cors());
@@ -28,6 +30,8 @@ function configureApp(app) {
   app.use("/", tasksRouter);
   app.use("/auth", authRouter);
   app.use("/users", createUser);
+
+  app.use("/api-docs", swaaggerUi.serve, swaaggerUi.setup(swaggerSpecs));
 
   app.use((req, res) => {
     res.status(StatusCodes.NOT_FOUND).json(null);
