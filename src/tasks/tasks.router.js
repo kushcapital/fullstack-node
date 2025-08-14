@@ -18,6 +18,67 @@ tasksRouter.get("/tasks", [getTaskValidator, authenticateToken], (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ * /tasks:
+ *  post:
+ *    summary: Create a new task
+ *    tags: [Tasks]
+ *    security:
+ *      - bearerAuth: []
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Task'
+ *    responses:
+ *      201:
+ *        description: Task created successfully
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: sucess
+ *              statusCode: 201
+ *              message: Created
+ *              data:
+ *                _id: 689690156b8bb2e1852fa36f
+ *                title: Create a new video
+ *                description: A video about fullstack web development
+ *                status: todo
+ *                priority: high
+ *                dueDate: 2024-01-15
+ *
+ *      401:
+ *        description: Not Authorized Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: unauthorized
+ *              error:
+ *                message: "You are not authorized to perform this request "
+ *
+ *      403:
+ *        description: Forbidden Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 403
+ *              message: Forbidden
+ *              error:
+ *                message: Please login agian, invalid token.
+ *
+ */
+
 tasksRouter.post(
   "/tasks",
   [createTaskValidator, authenticateToken],
