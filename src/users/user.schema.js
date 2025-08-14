@@ -39,3 +39,36 @@ const userSchema = new Schema(
 const User = model("user", userSchema);
 
 module.exports = User;
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - firstName
+ *         - email
+ *         - password
+ *       properties:
+ *         firstName:
+ *           type: string
+ *           description: The firstName of the user
+ *           maxLength: 100
+ *         lastName:
+ *           type: string
+ *           description: The lastName of the user
+ *           maxLength: 100
+ *         email:
+ *           type: string
+ *           description: A valid email address
+ *         password:
+ *           type: string
+ *           description: Must contain atleast character and also a numberm a capital letter and a special character
+ *       example:
+ *         firstName: john
+ *         lastName: Doe
+ *         email: jogh@doe.com
+ *         password: Password123#
+ */
