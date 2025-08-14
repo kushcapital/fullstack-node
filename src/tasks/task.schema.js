@@ -84,3 +84,48 @@ module.exports = Task;
  *         priority: "high"
  *         dueDate: "2024-01-15"
  */
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     TaskUpdate:
+ *       type: object
+ *       required:
+ *         - _id
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The MongoDb ogjectId of task
+ *           format: objectId
+ *         title:
+ *           type: string
+ *           description: The title of the task
+ *           maxLength: 100
+ *         description:
+ *           type: string
+ *           description: The description of the task
+ *           maxLength: 500
+ *         status:
+ *           type: string
+ *           description: The status of the task
+ *           enum: ["todo", "inProgress", "completed"]
+ *           default: "todo"
+ *         priority:
+ *           type: string
+ *           description: The priority of the task
+ *           enum: ["low", "normal", "high"]
+ *           default: "normal"
+ *         dueDate:
+ *           type: string
+ *           format: date
+ *           description: The due date of the task
+ *       example:
+ *         _id: 68967dce2192f0f8d7d4e89d
+ *         title: "Complete project documentation"
+ *         description: "Write comprehensive documentation for the new project including API references and user guides"
+ *         status: "todo"
+ *         priority: "high"
+ *         dueDate: "2024-01-15"
+ */
