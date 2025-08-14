@@ -129,3 +129,22 @@ module.exports = Task;
  *         priority: "high"
  *         dueDate: "2024-01-15"
  */
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     TaskDelete:
+ *       type: object
+ *       required:
+ *         - _id
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The MongoDb ogjectId of task
+ *           format: objectId 
+ *       example:
+ *         _id: 68967dce2192f0f8d7d4e89d
+ */
+

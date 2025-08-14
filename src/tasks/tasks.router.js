@@ -41,7 +41,7 @@ const authenticateToken = require("../middleware/authticateToken.middleware.js")
  *        schema:
  *          type: integer
  *          default: 'asc'
- *          enum: ['asc','dsc'] 
+ *          enum: ['asc','dsc']
  *        description: order of tasks
  *    responses:
  *      200:
@@ -241,6 +241,62 @@ tasksRouter.patch(
   }
 );
 
+/**
+ * @swagger
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ * /tasks:
+ *  delete:
+ *    summary: Delete the task
+ *    tags: [Tasks]
+ *    security:
+ *      - bearerAuth: []
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/TaskDelete'
+ *    responses:
+ *      200:
+ *        description: Task deleted successfully
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: sucess
+ *              statusCode: 200
+ *              message: Ok
+ *              data:
+ *                acknowledged: true
+ *                deletedCount: 1
+ *
+ *      401:
+ *        description: Not Authorized Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 401
+ *              message: unauthorized
+ *              error:
+ *                message: "You are not authorized to perform this request "
+ *
+ *      403:
+ *        description: Forbidden Error
+ *        content:
+ *          application/json:
+ *            example:
+ *              status: error
+ *              statusCode: 403
+ *              message: Forbidden
+ *              error:
+ *                message: Please login agian, invalid token.
+ *
+ */
 tasksRouter.delete(
   "/tasks",
   [deleteTaskValidator, authenticateToken],
