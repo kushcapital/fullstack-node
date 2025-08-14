@@ -41,3 +41,46 @@ const taskSchema = new Schema(
 
 const Task = model("Task", taskSchema);
 module.exports = Task;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Task:
+ *       type: object
+ *       required:
+ *         - title
+ *         - description
+ *         - status
+ *         - priority
+ *         - dueDate
+ *       properties:
+ *         title:
+ *           type: string
+ *           description: The title of the task
+ *           maxLength: 100
+ *         description:
+ *           type: string
+ *           description: The description of the task
+ *           maxLength: 500
+ *         status:
+ *           type: string
+ *           description: The status of the task
+ *           enum: ["todo", "inProgress", "completed"]
+ *           default: "todo"
+ *         priority:
+ *           type: string
+ *           description: The priority of the task
+ *           enum: ["low", "normal", "high"]
+ *           default: "normal"
+ *         dueDate:
+ *           type: string
+ *           format: date
+ *           description: The due date of the task
+ *       example:
+ *         title: "Complete project documentation"
+ *         description: "Write comprehensive documentation for the new project including API references and user guides"
+ *         status: "todo"
+ *         priority: "high"
+ *         dueDate: "2024-01-15"
+ */

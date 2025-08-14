@@ -14,7 +14,7 @@ const options = {
         url: "https://spdx.org/licenses/MIT.html",
       },
       contact: {
-        name: "Rajeev Kushwah",
+        name: "Rajeev Kushwaha",
         url: "kushwaharajeev.com",
         email: "rajeev0458@gmail.com",
       },
