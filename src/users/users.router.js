@@ -33,28 +33,6 @@ const createUsersRouter = express.Router();
  *                lastName: Doe
  *                email: jogh@doe.com
  *
- *      401:
- *        description: Not Authorized Error
- *        content:
- *          application/json:
- *            example:
- *              status: error
- *              statusCode: 401
- *              message: unauthorized
- *              error:
- *                message: "You are not authorized to perform this request "
- *
- *      403:
- *        description: Forbidden Error
- *        content:
- *          application/json:
- *            example:
- *              status: error
- *              statusCode: 403
- *              message: Forbidden
- *              error:
- *                message: Please login agian, invalid token.
- *
  */
 createUsersRouter.post("/createUser", createUserValidator, (req, res) => {
   const result = validationResult(req);

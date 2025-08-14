@@ -39,7 +39,7 @@ const authenticateToken = require("../middleware/authticateToken.middleware.js")
  *      - in: query
  *        name: order
  *        schema:
- *          type: integer
+ *          type: string
  *          default: 'asc'
  *          enum: ['asc','dsc']
  *        description: order of tasks
