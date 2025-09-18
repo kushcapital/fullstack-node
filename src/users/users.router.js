@@ -8,7 +8,7 @@ const createUsersRouter = express.Router();
 
 /**
  * @swagger
- * /User/create:
+ * /user/createUser:
  *  post:
  *    summary: Create a new user
  *    tags: [Users]
