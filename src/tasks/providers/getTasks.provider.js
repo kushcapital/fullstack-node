@@ -3,11 +3,12 @@ const { matchedData } = require("express-validator");
 const { StatusCodes } = require("http-status-codes");
 const errorLogger = require("../../helpers/errorLogger.helper.js");
 
-async function getTasksProvier(req, res) {
+async function getTasksProvider(req, res) {
   const data = matchedData(req);
 
   try {
-    const totalTasks = await Task.countDocuments();
+    const filter = {};
+    const totalTasks = await Task.countDocuments(filter);
     const currentPage = data.page;
     const limit = data.limit;
     const order = data.order;
@@ -18,9 +19,7 @@ async function getTasksProvier(req, res) {
       req.originalUrl.split("?")[0]
     }`;
 
-    const tasks = await Task.find({
-      status: { $in: ["inProgress"] },
-    })
+    const tasks = await Task.find(filter)
       .limit(limit)
       .skip((currentPage - 1) * limit)
       .sort({
@@ -49,10 +48,10 @@ async function getTasksProvier(req, res) {
     return res.status(StatusCodes.OK).json(finalResponse);
   } catch (error) {
     errorLogger("Error while fetching tasks", req, error);
-    return res.status(StatusCodes.GATEWAY_TIMEOUT).json({
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       reason: "Unable to process your request at the moment, please try later.",
     });
   }
 }
 
-module.exports = getTasksProvier;
+module.exports = getTasksProvider;

@@ -1,11 +1,11 @@
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
 const createTaskProvider = require("./providers/createTask.provider.js");
-const getTasksProvier = require("./providers/getTasks.provider.js");
+const getTasksProvider = require("./providers/getTasks.provider.js");
 const updateTaskProvider = require("./providers/update.Task.provider.js");
 const deleteTaskProvider = require("./providers/deleteTask.provider.js");
 
 async function handleGetTasks(req, res) {
-  return await getTasksProvier(req, res);
+  return await getTasksProvider(req, res);
 }
 
 async function handlePostTasks(req, res) {
